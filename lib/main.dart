@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snake/models/snake.dart';
@@ -41,6 +42,13 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
   late Timer timer;
 
   bool isActive = true;
+
+  void openHelp() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SecondScreen()));
+  }
+
+
 
   void update() {
     if (isActive) {
@@ -84,6 +92,19 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
     final grid = ref.watch(gridProvider);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Игра Змейка'),
+        actions: [
+          ElevatedButton(
+            child: Text('Sound') ,
+            style: ButtonStyle (
+              //backgroundColor: Colors.purple,
+            ),
+            onPressed: () => openHelp(),
+          ),
+
+        ],
+      ),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 100),
@@ -141,6 +162,41 @@ class ControllerWidget extends ConsumerWidget {
           child: const Text('right'),
         ),
       ],
+    );
+  }
+}
+
+
+class SecondScreen extends StatelessWidget {
+  //AudioCache audioCache = AudioCache();
+  //final player = AudioPlayer();
+  final player = AudioPlayer();
+  bool isPlaying = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pause'),
+      ),
+      backgroundColor: Colors.black,
+      body: Center(
+          child: RawMaterialButton(
+            child: Text (style: TextStyle(color: Colors.white),'Sound'),
+            onPressed: () {
+              if(isPlaying)
+              {
+                player.pause();
+                isPlaying = false;
+              }
+              else{
+                player.play(AssetSource('sound.mp3'));
+                isPlaying = true;
+              }
+            },
+
+          )
+      ),
     );
   }
 }
