@@ -4,9 +4,12 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snake/models/snake.dart';
+import 'package:flutter_snake/pause.dart';
 import 'package:flutter_snake/providers/ground_provider.dart';
 import 'package:flutter_snake/providers/level_provider.dart';
+import 'package:flutter_snake/providers/music.dart';
 import 'package:flutter_snake/providers/snake_provider.dart';
+import 'package:flutter_snake/providers/sound.dart';
 import 'package:flutter_snake/providers/ticker_provider.dart';
 
 void main() {
@@ -45,10 +48,8 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
 
   void openHelp() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SecondScreen()));
+        context, MaterialPageRoute(builder: (context) => PauseScreen()));
   }
-
-
 
   void update() {
     if (isActive) {
@@ -79,7 +80,7 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
   @override
   void initState() {
     super.initState();
-
+    ref.read(soundProviderBack.notifier).setMusic();
     timer = Timer.periodic(duration, (timer) {
       update();
     });
@@ -90,21 +91,9 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
     final level = ref.watch(levelProvider);
 
     final grid = ref.watch(gridProvider);
-
+    final music = ref.watch(soundProviderBack.notifier);
+    final sound = ref.watch(soundProvider.notifier);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Игра Змейка'),
-        actions: [
-          ElevatedButton(
-            child: Text('Sound') ,
-            style: ButtonStyle (
-              //backgroundColor: Colors.purple,
-            ),
-            onPressed: () => openHelp(),
-          ),
-
-        ],
-      ),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 100),
@@ -120,7 +109,17 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
             const Align(
               alignment: Alignment.bottomCenter,
               child: ControllerWidget(),
-            )
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: openHelp,
+                icon: Icon(
+                  Icons.pause,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -167,36 +166,3 @@ class ControllerWidget extends ConsumerWidget {
 }
 
 
-class SecondScreen extends StatelessWidget {
-  //AudioCache audioCache = AudioCache();
-  //final player = AudioPlayer();
-  final player = AudioPlayer();
-  bool isPlaying = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Pause'),
-      ),
-      backgroundColor: Colors.black,
-      body: Center(
-          child: RawMaterialButton(
-            child: Text (style: TextStyle(color: Colors.white),'Sound'),
-            onPressed: () {
-              if(isPlaying)
-              {
-                player.pause();
-                isPlaying = false;
-              }
-              else{
-                player.play(AssetSource('sound.mp3'));
-                isPlaying = true;
-              }
-            },
-
-          )
-      ),
-    );
-  }
-}
