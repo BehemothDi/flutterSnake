@@ -37,10 +37,8 @@ class SoundNotifier extends StateNotifier<AudioPlayer> {
     state.pause();
     _isPlaying = false;
   }
-
 }
 
 final soundProvider = StateNotifierProvider<SoundNotifier, AudioPlayer>((ref) {
   return SoundNotifier();
-
 });

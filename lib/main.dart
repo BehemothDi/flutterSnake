@@ -10,7 +10,8 @@ import 'package:flutter_snake/providers/level_provider.dart';
 import 'package:flutter_snake/providers/music.dart';
 import 'package:flutter_snake/providers/snake_provider.dart';
 import 'package:flutter_snake/providers/sound.dart';
-import 'package:flutter_snake/providers/ticker_provider.dart';
+import 'package:flutter_snake/providers/is_turned_provider.dart';
+import 'package:flutter_snake/providers/ticker_povider.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -47,6 +48,7 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
   bool isActive = true;
 
   void openHelp() {
+    ref.read(isActiveProvider.notifier).isActive = false;
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => PauseScreen()));
   }
@@ -71,9 +73,7 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
           ),
         );
       }
-      ref.read(tickerProvider.notifier).isTurnedAlready = false;
-    } else {
-      print('no');
+      ref.read(isTurnedProvider.notifier).isTurnedAlready = false;
     }
   }
 
@@ -81,9 +81,7 @@ class _LevelWidgetState extends ConsumerState<LevelWidget> {
   void initState() {
     super.initState();
     ref.read(soundProviderBack.notifier).setMusic();
-    timer = Timer.periodic(duration, (timer) {
-      update();
-    });
+    timer = ref.read(timerProvider);
   }
 
   @override

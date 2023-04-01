@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snake/providers/music.dart';
 import 'package:flutter_snake/providers/sound.dart';
+import 'package:flutter_snake/providers/ticker_povider.dart';
 
 class PauseScreen extends ConsumerWidget {
   //AudioCache audioCache = AudioCache();
@@ -15,6 +16,16 @@ class PauseScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Пауза'),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+            ref.read(isActiveProvider.notifier).isActive = true;
+          },
+        ),
       ),
       backgroundColor: Colors.white,
       body: Center(
@@ -50,7 +61,7 @@ class PauseScreen extends ConsumerWidget {
                   : Icons.volume_off),
               onPressed: () {
                 if (sound.isPlaying) {
-                  sound.pauseSoundDied();
+                  sound.setSoundDied();
                 } else {
                   sound.pauseSoundDied();
                 }

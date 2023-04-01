@@ -6,7 +6,7 @@ class SoundNotifierBack extends StateNotifier<AudioPlayer> {
   bool _isPlaying = true;
   bool _isPlayingSound = true;
 
-  double volume = 1;
+  double volume = 0.5;
 
   bool get isPlaying => _isPlaying;
 

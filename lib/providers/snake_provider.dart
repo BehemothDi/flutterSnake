@@ -1,17 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snake/models/snake.dart';
 import 'package:flutter_snake/providers/food_provider.dart';
-import 'package:flutter_snake/providers/ticker_provider.dart';
+import 'package:flutter_snake/providers/is_turned_provider.dart';
+import 'package:flutter_snake/providers/sound.dart';
 
 import 'level_provider.dart';
 
 class SnakeNotifier extends StateNotifier<Snake> {
   final LevelNotifier levelNotifier;
   final FoodNotifier foodNotifier;
-  final TickerNotifier tickerNotifier;
+  final IsTurnedNotifier tickerNotifier;
+  final SoundNotifier soundNotifier;
 
-  SnakeNotifier(this.levelNotifier, this.foodNotifier, this.tickerNotifier)
-      : super(const Snake(
+  SnakeNotifier(
+    this.levelNotifier,
+    this.foodNotifier,
+    this.tickerNotifier,
+    this.soundNotifier,
+  ) : super(const Snake(
           body: [],
           direction: Direction.top,
           speed: Speed.slow,
@@ -82,6 +88,7 @@ class SnakeNotifier extends StateNotifier<Snake> {
     if (list.last != food) {
       list.removeAt(0);
     } else {
+      soundNotifier.setSoundEat();
       foodNotifier.generateFood();
     }
 
@@ -98,6 +105,7 @@ final snakeProvider = StateNotifierProvider<SnakeNotifier, Snake>((ref) {
   return SnakeNotifier(
     ref.watch(levelProvider.notifier),
     ref.watch(foodProvider.notifier),
-    ref.watch(tickerProvider.notifier),
+    ref.watch(isTurnedProvider.notifier),
+    ref.watch(soundProvider.notifier),
   );
 });
