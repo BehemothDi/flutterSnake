@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snake/models/block.dart';
 import 'package:flutter_snake/models/ground.dart';
 import 'package:flutter_snake/providers/food_provider.dart';
+import 'package:flutter_snake/providers/is_game_over.dart';
 import 'package:flutter_snake/providers/level_provider.dart';
 import 'package:flutter_snake/providers/snake_provider.dart';
 
@@ -10,11 +11,13 @@ class GroundNotifier extends StateNotifier<Ground> {
   final LevelNotifier levelNotifier;
   final SnakeNotifier snakeNotifier;
   final FoodNotifier foodNotifier;
+  final GameOverNotifier gameOverNotifier;
 
   GroundNotifier(
     this.levelNotifier,
     this.snakeNotifier,
     this.foodNotifier,
+    this.gameOverNotifier,
   ) : super(
           Ground(
             grid: List.generate(
@@ -26,11 +29,11 @@ class GroundNotifier extends StateNotifier<Ground> {
           ),
         );
 
-  bool update() {
+  void update() {
     final isLose = snakeNotifier.move();
 
     if (isLose) {
-      return isLose;
+      gameOverNotifier.isOver = true;
     }
 
     final snakeBody = snakeNotifier.state.body;
@@ -49,8 +52,6 @@ class GroundNotifier extends StateNotifier<Ground> {
         setBlock(i, BlockType.blank);
       }
     }
-
-    return false;
   }
 
   void setBlock(
@@ -74,6 +75,7 @@ final groundProvider = StateNotifierProvider<GroundNotifier, Ground>((ref) {
     ref.watch(levelProvider.notifier),
     ref.watch(snakeProvider.notifier),
     ref.watch(foodProvider.notifier),
+    ref.watch(gameOverProvider.notifier),
   );
 });
 
@@ -92,11 +94,11 @@ final gridProvider = StateProvider<List<Widget>>((ref) {
   }
 
   Widget toWidget(Block block) => Padding(
-        padding: const EdgeInsets.all(2),
+        padding: const EdgeInsets.all(1),
         child: Container(
           decoration: BoxDecoration(
             color: colorFromType(block.type),
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(2),
           ),
         ),
       );

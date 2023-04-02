@@ -1,10 +1,15 @@
-class Level {
-  final int rows;
-  final int columns;
-  late final int area;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Level({
-    required this.rows,
-    required this.columns,
-  }) : area = rows * columns;
+part 'level.freezed.dart';
+
+@freezed
+class Level with _$Level {
+  const Level._();
+
+  const factory Level({
+    required int rows,
+    required int columns,
+  }) = _Level;
+
+  int get area => rows * columns;
 }

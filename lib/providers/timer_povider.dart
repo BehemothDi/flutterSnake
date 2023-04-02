@@ -1,48 +1,39 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snake/providers/is_turned_provider.dart';
-import 'package:flutter_snake/providers/sound.dart';
+import 'package:flutter_snake/providers/sound_provider.dart';
 
 import 'ground_provider.dart';
+import 'is_active.dart';
+import 'is_game_over.dart';
 
 class TimerNotifier extends StateNotifier<Timer> {
   final GroundNotifier groundNotifier;
   final IsActiveNotifier isActiveNotifier;
   final IsTurnedNotifier isTurnedNotifier;
   final SoundNotifier soundNotifier;
+  final GameOverNotifier gameOverNotifier;
 
   TimerNotifier(
     this.groundNotifier,
     this.isActiveNotifier,
     this.isTurnedNotifier,
     this.soundNotifier,
+    this.gameOverNotifier,
   ) : super(
           Timer.periodic(
-            Duration(milliseconds: 400),
+            const Duration(milliseconds: 400),
             (timer) {
               if (isActiveNotifier.isActive) {
-                final value = groundNotifier.update();
+                groundNotifier.update();
+                final value = gameOverNotifier.isOver;
                 if (value) {
                   isActiveNotifier.isActive = false;
-                  soundNotifier.setSoundDied();
-                  // Если вернулось true - значит проиграли
-                  // показать экран проигрыша
-                  // сейчас там экран hehe
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const Scaffold(
-                  //       body: Center(
-                  //         child: Text('hehe'),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // );
+                  soundNotifier.playSoundDied();
                 }
                 isTurnedNotifier.isTurnedAlready = false;
+
               }
             },
           ),
@@ -56,18 +47,12 @@ final timerProvider = StateNotifierProvider<TimerNotifier, Timer>((ref) {
   final isActiveNotifier = ref.watch(isActiveProvider.notifier);
   final isTurnedNotifier = ref.watch(isTurnedProvider.notifier);
   final soundNotifier = ref.watch(soundProvider.notifier);
+  final gameOverNotifier = ref.watch(gameOverProvider.notifier);
   return TimerNotifier(
-      groundNotifier, isActiveNotifier, isTurnedNotifier, soundNotifier);
-});
-
-class IsActiveNotifier extends StateNotifier<bool> {
-  IsActiveNotifier() : super(true);
-
-  set isActive(bool value) => state = value;
-
-  bool get isActive => state;
-}
-
-final isActiveProvider = StateNotifierProvider<IsActiveNotifier, bool>((ref) {
-  return IsActiveNotifier();
+    groundNotifier,
+    isActiveNotifier,
+    isTurnedNotifier,
+    soundNotifier,
+    gameOverNotifier,
+  );
 });

@@ -2,40 +2,35 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SoundNotifierBack extends StateNotifier<AudioPlayer> {
-  SoundNotifierBack() : super(AudioPlayer());
+  SoundNotifierBack() : super(AudioPlayer()..setVolume(0.1));
   bool _isPlaying = true;
-  bool _isPlayingSound = true;
 
-  double volume = 0.5;
+  double _volume = 0.2;
 
   bool get isPlaying => _isPlaying;
 
-  bool get isPlayingSound => _isPlayingSound;
   ReleaseMode mode = ReleaseMode.loop;
 
-  void setMusic() {
+  void playMusic() {
     state.play(AssetSource('sound.mp3'));
     state.setReleaseMode(mode);
-    state.setVolume(volume);
     _isPlaying = true;
   }
 
   void setVolume(double value) {
     state.setVolume(value);
-    volume = value;
+    _volume = value;
   }
 
-  double get vol => volume;
+  double get volume => _volume;
 
   void pause() {
     state.pause();
     _isPlaying = false;
   }
-
 }
 
-final soundProviderBack = StateNotifierProvider<SoundNotifierBack, AudioPlayer>((ref) {
+final soundProviderBack =
+    StateNotifierProvider<SoundNotifierBack, AudioPlayer>((ref) {
   return SoundNotifierBack();
-
-
 });

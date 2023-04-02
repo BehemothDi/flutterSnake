@@ -17,9 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Snake {
   List<int> get body => throw _privateConstructorUsedError;
-
   Direction get direction => throw _privateConstructorUsedError;
-
   Speed get speed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +28,6 @@ mixin _$Snake {
 abstract class $SnakeCopyWith<$Res> {
   factory $SnakeCopyWith(Snake value, $Res Function(Snake) then) =
       _$SnakeCopyWithImpl<$Res, Snake>;
-
   @useResult
   $Res call({List<int> body, Direction direction, Speed speed});
 }
@@ -42,7 +39,6 @@ class _$SnakeCopyWithImpl<$Res, $Val extends Snake>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -74,7 +70,6 @@ class _$SnakeCopyWithImpl<$Res, $Val extends Snake>
 abstract class _$$_SnakeCopyWith<$Res> implements $SnakeCopyWith<$Res> {
   factory _$$_SnakeCopyWith(_$_Snake value, $Res Function(_$_Snake) then) =
       __$$_SnakeCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({List<int> body, Direction direction, Speed speed});
@@ -120,7 +115,6 @@ class _$_Snake implements _Snake {
       : _body = body;
 
   final List<int> _body;
-
   @override
   List<int> get body {
     if (_body is EqualUnmodifiableListView) return _body;
@@ -168,13 +162,10 @@ abstract class _Snake implements Snake {
 
   @override
   List<int> get body;
-
   @override
   Direction get direction;
-
   @override
   Speed get speed;
-
   @override
   @JsonKey(ignore: true)
   _$$_SnakeCopyWith<_$_Snake> get copyWith =>
