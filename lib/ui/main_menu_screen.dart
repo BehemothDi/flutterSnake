@@ -1,10 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MainMenuScreen extends StatelessWidget {
+class MainMenuScreen extends ConsumerStatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
 
+  @override
+  ConsumerState<MainMenuScreen> createState() => _MainMenuScreenState();
+}
+
+class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +25,7 @@ class MainMenuScreen extends StatelessWidget {
               width: 400,
               height: 100,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                 ),
@@ -32,8 +37,7 @@ class MainMenuScreen extends StatelessWidget {
               width: 400,
               height: 100,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                 ),
@@ -45,8 +49,7 @@ class MainMenuScreen extends StatelessWidget {
               width: 400,
               height: 100,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                 ),
@@ -58,8 +61,7 @@ class MainMenuScreen extends StatelessWidget {
               width: 400,
               height: 100,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                 ),
@@ -82,6 +84,5 @@ class MainMenuScreen extends StatelessWidget {
         ),
       ),
     );
-
   }
 }
