@@ -23,25 +23,16 @@ class LevelWidget extends ConsumerStatefulWidget {
 
 class _LevelWidgetState extends ConsumerState<LevelWidget> {
   Duration duration = const Duration(milliseconds: 100);
-  late Timer timer;
-
-  bool isActive = true;
 
   void openHelp() {
     ref.read(isActiveProvider.notifier).isActive = false;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const PauseScreen(),
-      ),
-    );
   }
 
   @override
   void initState() {
     super.initState();
     ref.read(soundProviderBack.notifier).playMusic();
-    timer = ref.read(timerProvider);
+    ref.read(timerProvider);
   }
 
   @override

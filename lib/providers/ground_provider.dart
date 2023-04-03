@@ -37,9 +37,9 @@ class GroundNotifier extends StateNotifier<Ground> {
     }
 
     final snakeBody = snakeNotifier.state.body;
-    for (int element in snakeBody) {
-      setBlock(element, BlockType.snake);
-    }
+
+    setBlock(snakeBody.first, BlockType.snake);
+    setBlock(snakeBody.last, BlockType.snake);
 
     final columns = levelNotifier.state.columns;
     final rows = levelNotifier.state.rows;

@@ -20,7 +20,6 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,9 +32,14 @@ class _MyAppState extends ConsumerState<MyApp> {
         child: Stack(
           children: [
             const MainMenuScreen(),
-            const LevelWidget(),
             Visibility(
-              visible: !ref.watch(isActiveProvider) && !ref.watch(gameOverProvider.notifier).isOver,
+              visible:
+                  ref.watch(isActiveProvider) || !ref.watch(gameOverProvider),
+              child: const LevelWidget(),
+            ),
+            Visibility(
+              visible: !ref.watch(isActiveProvider) &&
+                  !ref.watch(gameOverProvider.notifier).isOver,
               child: const PauseScreen(),
             ),
             Visibility(

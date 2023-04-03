@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snake/providers/music_provider.dart';
 import 'package:flutter_snake/providers/sound_provider.dart';
-import 'package:flutter_snake/providers/timer_povider.dart';
 
 import '../providers/is_active.dart';
 
