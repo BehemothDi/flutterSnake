@@ -84,34 +84,61 @@ class ControllerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final snakeNotifier = ref.watch(snakeProvider.notifier);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.top);
+    return SizedBox(
+      height: 180,
+      width: 180,
+      child: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(
+          9,
+              (index) {
+            if (index == 1) {
+              return InkWell(
+                onTap: () {
+                  snakeNotifier.turn(Direction.top);
+                },
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_upward),
+                ),
+              );
+            } else if (index == 3) {
+              return InkWell(
+                onTap: () {
+                  snakeNotifier.turn(Direction.left);
+                },
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_back),
+                ),
+              );
+            } else if (index == 5) {
+              return InkWell(
+                onTap: () {
+                  snakeNotifier.turn(Direction.right);
+                },
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_forward),
+                ),
+              );
+            } else if (index == 7) {
+              return InkWell(
+                onTap: () {
+                  snakeNotifier.turn(Direction.bottom);
+                },
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_downward),
+                ),
+              );
+            } else {
+              return Container(color: Colors.transparent);
+            }
           },
-          child: const Text('top'),
         ),
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.bottom);
-          },
-          child: const Text('bottom'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.left);
-          },
-          child: const Text('left'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.right);
-          },
-          child: const Text('right'),
-        ),
-      ],
-    );
+      ),
+    )
+    ;
   }
 }
