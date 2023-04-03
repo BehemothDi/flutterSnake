@@ -102,47 +102,43 @@ class ControllerWidget extends ConsumerWidget {
           9,
               (index) {
             if (index == 1) {
-              return ElevatedButton.icon(
-                onPressed: () {
+              return InkWell(
+                onTap: () {
                   snakeNotifier.turn(Direction.top);
                 },
-                icon: const Icon(Icons.arrow_upward),
-                label: const SizedBox.shrink(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_upward),
                 ),
               );
             } else if (index == 3) {
-              return ElevatedButton.icon(
-                onPressed: () {
+              return InkWell(
+                onTap: () {
                   snakeNotifier.turn(Direction.left);
                 },
-                icon: const Icon(Icons.arrow_back),
-                label: const SizedBox.shrink(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_back),
                 ),
               );
             } else if (index == 5) {
-              return ElevatedButton.icon(
-                onPressed: () {
+              return InkWell(
+                onTap: () {
                   snakeNotifier.turn(Direction.right);
                 },
-                icon: const Icon(Icons.arrow_forward),
-                label: const SizedBox.shrink(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_forward),
                 ),
               );
             } else if (index == 7) {
-              return ElevatedButton.icon(
-                onPressed: () {
+              return InkWell(
+                onTap: () {
                   snakeNotifier.turn(Direction.bottom);
                 },
-                icon: const Icon(Icons.arrow_downward),
-                label: const SizedBox.shrink(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                child: Container(
+                  color: Colors.purple,
+                  child: const Icon(Icons.arrow_downward),
                 ),
               );
             } else {
