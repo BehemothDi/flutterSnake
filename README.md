@@ -1,16 +1,26 @@
-# flutter_snake
+## Проект  flutterSnake:  игра (Лабораторная работа №3)<br>
 
-A new Flutter project.
+### Краткое описание проекта
+Проект выполнен командой "Левая палочка Твикс" - командой студентов группы 4БПМИ-ПТ ФГБОУ ВО "МАГУ" в рамках дисциплины "Основы разработки кросс-платформенных приложений"<br>
+Результатом работы команды является кроссплатформенное приложение игра - змейка.<br>
+### Функции
+- Разделами меню являются: начать игру, выбор уровня, выбор сложности, настройки, выход.
+- Язык интерфейса приложения - русский.
+- В приложении реализован выбор одного из 5 уровней игры.
+- В приложении реализован выбор одного из 3 видов сложности игры.
+- В окне паузы/настроек пользователь может выключиить или включить фоновую музыку и звуковые эффекты, а также отрегулировать громкость.<br>
+### Используемые технологии:
+- Язык программирования: dart
+- Фреймворки: flutter 
+### Сторонние библиотеки: 
+- flutter_riverpod: ^2.3.2
+- freezed: ^2.3.2
+- build_runner: ^2.3.3
+- audioplayers: ^3.0.1
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Инструкции по сборке проекта для нескольких операционных систем: 
+- Приложения размещено на сервере и для запуска в браузере необходимо перейти по ссылке `https://bahonika.github.io` (при внесении изменений в текущий проект они автоматически отобразятся в браузере)
+- Для генерации apk файла для Android необходимо запустить команду `flutter build apk --split-per-abi`
+- Для генерации запускаемого приложения для Windows необходимо запустить команду `flutter build windows`
+### Перечень используемых ресурсов: 
+- Используемые ресурсы отсутствуют
