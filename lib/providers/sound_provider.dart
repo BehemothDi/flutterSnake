@@ -34,6 +34,9 @@ class SoundNotifier extends StateNotifier<AudioPlayer> {
   }
 
   double get volume => _volume;
+
+  void setSoundDied
+      () {}
 }
 
 final soundProvider = StateNotifierProvider<SoundNotifier, AudioPlayer>((ref) {

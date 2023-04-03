@@ -93,34 +93,65 @@ class ControllerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final snakeNotifier = ref.watch(snakeProvider.notifier);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.top);
+    return SizedBox(
+      height: 180,
+      width: 180,
+      child: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(
+          9,
+              (index) {
+            if (index == 1) {
+              return ElevatedButton.icon(
+                onPressed: () {
+                  snakeNotifier.turn(Direction.top);
+                },
+                icon: const Icon(Icons.arrow_upward),
+                label: const SizedBox.shrink(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                ),
+              );
+            } else if (index == 3) {
+              return ElevatedButton.icon(
+                onPressed: () {
+                  snakeNotifier.turn(Direction.left);
+                },
+                icon: const Icon(Icons.arrow_back),
+                label: const SizedBox.shrink(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                ),
+              );
+            } else if (index == 5) {
+              return ElevatedButton.icon(
+                onPressed: () {
+                  snakeNotifier.turn(Direction.right);
+                },
+                icon: const Icon(Icons.arrow_forward),
+                label: const SizedBox.shrink(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                ),
+              );
+            } else if (index == 7) {
+              return ElevatedButton.icon(
+                onPressed: () {
+                  snakeNotifier.turn(Direction.bottom);
+                },
+                icon: const Icon(Icons.arrow_downward),
+                label: const SizedBox.shrink(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(81, 75, 145, 1.0),
+                ),
+              );
+            } else {
+              return Container(color: Colors.transparent);
+            }
           },
-          child: const Text('top'),
         ),
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.bottom);
-          },
-          child: const Text('bottom'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.left);
-          },
-          child: const Text('left'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            snakeNotifier.turn(Direction.right);
-          },
-          child: const Text('right'),
-        ),
-      ],
-    );
+      ),
+    )
+    ;
   }
 }
