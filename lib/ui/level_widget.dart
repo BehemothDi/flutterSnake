@@ -98,7 +98,7 @@ class ControllerWidget extends ConsumerWidget {
                   snakeNotifier.turn(Direction.top);
                 },
                 child: Container(
-                  color: Colors.purple,
+                  color: Colors.blueGrey,
                   child: const Icon(Icons.arrow_upward),
                 ),
               );
@@ -108,7 +108,7 @@ class ControllerWidget extends ConsumerWidget {
                   snakeNotifier.turn(Direction.left);
                 },
                 child: Container(
-                  color: Colors.purple,
+                  color: Colors.blueGrey,
                   child: const Icon(Icons.arrow_back),
                 ),
               );
@@ -118,7 +118,7 @@ class ControllerWidget extends ConsumerWidget {
                   snakeNotifier.turn(Direction.right);
                 },
                 child: Container(
-                  color: Colors.purple,
+                  color: Colors.blueGrey,
                   child: const Icon(Icons.arrow_forward),
                 ),
               );
@@ -128,7 +128,7 @@ class ControllerWidget extends ConsumerWidget {
                   snakeNotifier.turn(Direction.bottom);
                 },
                 child: Container(
-                  color: Colors.purple,
+                  color: Colors.blueGrey,
                   child: const Icon(Icons.arrow_downward),
                 ),
               );

@@ -1,10 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MainMenuScreen extends StatelessWidget {
+class MainMenuScreen extends ConsumerStatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
 
+  @override
+  ConsumerState<MainMenuScreen> createState() => _MainMenuScreenState();
+}
+
+class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +26,10 @@ class MainMenuScreen extends StatelessWidget {
               height: 100,
               child: ElevatedButton(
                 onPressed: () {
+
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.blueGrey,
                 ),
                 child: const Text('Начать игру'),
               ),
@@ -32,10 +39,9 @@ class MainMenuScreen extends StatelessWidget {
               width: 400,
               height: 100,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.blueGrey,
                 ),
                 child: const Text('Выбор уровня'),
               ),
@@ -45,10 +51,9 @@ class MainMenuScreen extends StatelessWidget {
               width: 400,
               height: 100,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.blueGrey,
                 ),
                 child: const Text('Выбор сложности'),
               ),
@@ -58,10 +63,9 @@ class MainMenuScreen extends StatelessWidget {
               width: 400,
               height: 100,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.blueGrey,
                 ),
                 child: const Text('Настройки'),
               ),
@@ -73,7 +77,7 @@ class MainMenuScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => exit(0),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.blueGrey,
                 ),
                 child: const Text('Выход'),
               ),
@@ -82,6 +86,5 @@ class MainMenuScreen extends StatelessWidget {
         ),
       ),
     );
-
   }
 }
